@@ -12,9 +12,9 @@ actions = [("Action-1", 20, 0.05), ("Action-2", 30, 0.1), ("Action-3", 50, 0.15)
            ("Action-19", 24, 0.21), ("Action-20", 114, 0.18)]
 
 
-def csv_to_list(csv_file):
+def convert_csv_to_list(csv_file):
     """
-    Fonction copiant les données d'un fichier csv vers une liste, et efface les données
+    Fonction copiant les données du fichier dataset csv vers une liste, et efface les données
     erronées (inférieur ou égal à 0).
     """
     with open(csv_file) as dataset:
@@ -78,9 +78,9 @@ def trouver_actions_optimales(actions, max_cout):
     print(f"avec ces actions: {[num_actions[0] for num_actions in lst_actions_selectionnes]}")
 
 
-def dynamic_compare_to_siena_data(infile_siena, csv_file):
+def dynamic_compare_data_sienna(infile_siena, csv_file):
     """
-    Application des fonctions précédente sur les données de Sienna et on renvoie les résultats
+    Application des fonctions précédente sur les données de Sienna en envoyant les résultats
     """
     list_siena = []
 
@@ -90,9 +90,7 @@ def dynamic_compare_to_siena_data(infile_siena, csv_file):
             action = slice(10)
             list_siena.append(ligne[action])
 
-    print(list_siena)
-
-    dataset = csv_to_list(csv_file)
+    dataset = convert_csv_to_list(csv_file)
 
     dataset_compare = []
 
@@ -101,12 +99,12 @@ def dynamic_compare_to_siena_data(infile_siena, csv_file):
             if i[0] == j:
                 dataset_compare.append(i)
 
-    return trouver_actions_optimales(dataset_compare, 50000)
+    return trouver_actions_optimales(dataset_compare, 80000)
 
 
-#trouver_actions_optimales(csv_to_list("dataset1_Python+P7.csv"), 5000)
-#print(trouver_actions_optimales(csv_to_list('dataset2_Python+P7.csv'), 5000))
+#trouver_actions_optimales(csv_to_list("dataset1_Python+P7.csv"), 10000)
+#print(trouver_actions_optimales(csv_to_list('dataset2_Python+P7.csv'), 10000))
 
-print(dynamic_compare_to_siena_data('solution1_Python+P7siena.txt', 'dataset1_Python+P7.csv'))
-#print(dynamic_compare_to_siena_data('solution2_Python+P7siena.txt', 'dataset2_Python+P7.csv'))
+#print(dynamic_compare_data_sienna('solution1_Python+P7siena.txt', 'dataset1_Python+P7.csv'))
+#print(dynamic_compare_data_sienna('solution2_Python+P7siena.txt', 'dataset2_Python+P7.csv'))
 
